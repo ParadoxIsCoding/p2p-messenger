@@ -17,5 +17,11 @@ If you are seeing `vite: command not found`, it usually means dependencies are n
    ```
 
 ## Troubleshooting
-- **Command not found**: Ensure you ran `npm install` in the project directory.
-- **Network Access**: The app runs on `0.0.0.0`, so you can access it from other devices on your network using the IP address shown in the terminal (e.g., `http://192.168.1.5:5173`).
+
+### "vite: command not found" or "sh: line 1: vite: command not found"
+This error means the project dependencies are missing.
+- **Fix**: Run `npm install` in the project root directory.
+- If it still fails, try deleting `node_modules` and running `npm install` again.
+
+### Network Access
+The app runs on `0.0.0.0`, so you can access it from other devices on your network using the IP address shown in the terminal (e.g., `http://192.168.1.x:5173`).

@@ -51,8 +51,9 @@ body {
 }
 
 /* Open UI / Firefox support */
-scrollbar-width: thin;
-scrollbar-color: var(--color-glass-border) transparent;
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-glass-border) transparent;
 }
 
 ::-webkit-scrollbar {
