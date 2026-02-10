@@ -1,21 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  --color-neon-blue: #00f3ff;
-  --color-neon-purple: #bc13fe;
-  --color-glass-bg: rgba(255, 255, 255, 0.05);
-  --color-glass-border: rgba(255, 255, 255, 0.1);
-  --color-bg-dark: #0a0a0f;
+  --color-bg-primary: #09090b;
+  --color-bg-secondary: #18181b;
+  --color-bg-tertiary: #27272a;
+  --color-border: #3f3f46;
+  --color-text-primary: #fafafa;
+  --color-text-secondary: #a1a1aa;
+  --color-accent: #3b82f6;
+  /* Blue-500 */
+  --color-accent-hover: #2563eb;
+  /* Blue-600 */
+  --color-danger: #ef4444;
 }
 
 :root {
-  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: var(--color-bg-dark);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -29,35 +35,24 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #000000 100%);
-  overflow: hidden;
+  background-color: var(--color-bg-primary);
 }
 
-/* Glassmorphism Utilities */
-.glass-panel {
-  background: var(--color-glass-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--color-glass-border);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+/* Utilities */
+.panel {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-.neon-text {
-  text-shadow: 0 0 10px var(--color-neon-blue), 0 0 20px var(--color-neon-blue);
-}
-
-.neon-border {
-  box-shadow: 0 0 5px var(--color-neon-blue), inset 0 0 5px var(--color-neon-blue);
-}
-
-/* Open UI / Firefox support */
+/* Scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-glass-border) transparent;
+  scrollbar-color: var(--color-border) transparent;
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -65,10 +60,10 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-glass-border);
-  border-radius: 4px;
+  background: var(--color-border);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--color-text-secondary);
 }

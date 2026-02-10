@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send } from 'lucide-react';
-import { NeonButton } from './NeonButton';
+import { Send, MessageSquare } from 'lucide-react';
+import { Button } from './Button';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const ChatWindow = ({ messages, sendMessage, disabled }) => {
@@ -24,10 +24,16 @@ export const ChatWindow = ({ messages, sendMessage, disabled }) => {
     };
 
     return (
-        <div className="flex-1 flex flex-col h-full min-h-0">
+        <div className="flex-1 flex flex-col h-full min-h-0 bg-[var(--color-bg-primary)]">
             {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                <AnimatePresence>
+            <div className="flex-1 overflow-y-auto p-6 space-y-6">
+                {messages.length === 0 && (
+                    <div className="h-full flex flex-col items-center justify-center text-[var(--color-text-secondary)] opacity-50">
+                        <MessageSquare className="w-12 h-12 mb-2" />
+                        <p>No messages yet</p>
+                    </div>
+                )}
+                <AnimatePresence initial={false}>
                     {messages.map((msg, index) => (
                         <motion.div
                             key={index}
@@ -37,18 +43,18 @@ export const ChatWindow = ({ messages, sendMessage, disabled }) => {
                         >
                             <div
                                 className={`
-                                    max-w-[70%] rounded-2xl px-4 py-2 
+                                    max-w-[75%] rounded-2xl px-5 py-3 shadow-sm text-sm leading-relaxed
                                     ${msg.isSelf
-                                        ? 'bg-[var(--color-neon-blue)] text-black rounded-tr-none'
-                                        : 'bg-[rgba(255,255,255,0.1)] text-white rounded-tl-none border border-[var(--color-glass-border)]'
+                                        ? 'bg-[var(--color-accent)] text-white'
+                                        : 'bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] border border-[var(--color-border)]'
                                     }
                                 `}
                             >
-                                <div className="text-xs opacity-50 mb-1 flex justify-between gap-4">
-                                    <span>{msg.isSelf ? 'You' : msg.sender?.slice(0, 5)}</span>
-                                    <span>{new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                <div className={`text-[10px] mb-1 flex justify-between gap-4 ${msg.isSelf ? 'text-blue-200' : 'text-[var(--color-text-secondary)]'}`}>
+                                    <span className="font-medium">{msg.isSelf ? 'You' : 'Peer'}</span>
+                                    <span className="opacity-70">{new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                                 </div>
-                                <p className="break-words">{msg.text}</p>
+                                <p className="break-words font-normal whitespace-pre-wrap">{msg.text}</p>
                             </div>
                         </motion.div>
                     ))}
@@ -57,22 +63,23 @@ export const ChatWindow = ({ messages, sendMessage, disabled }) => {
             </div>
 
             {/* Input Area */}
-            <form onSubmit={handleSend} className="p-4 border-t border-[var(--color-glass-border)] flex gap-2">
+            <form onSubmit={handleSend} className="p-4 bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)] flex gap-3 items-center">
                 <input
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    placeholder={disabled ? "Connect to a peer to chat..." : "Type a message..."}
+                    placeholder={disabled ? "Connect to a peer to start chatting..." : "Type a message..."}
                     disabled={disabled}
-                    className="flex-1 bg-black/20 border border-[var(--color-glass-border)] rounded-full px-6 py-3 text-white focus:outline-none focus:border-[var(--color-neon-blue)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex-1 bg-[var(--color-bg-primary)] border border-[var(--color-border)] rounded-full px-5 py-3 text-sm text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)] transition-all placeholder:text-zinc-600 disabled:opacity-50 disabled:cursor-not-allowed"
                 />
-                <NeonButton
+                <Button
                     type="submit"
+                    variant="primary"
                     disabled={disabled || !input.trim()}
-                    className="!rounded-full w-12 h-12 flex items-center justify-center p-0"
+                    className="!rounded-full w-12 h-12 !min-w-[48px] !p-0 bg-[var(--color-text-primary)] hover:bg-white text-black border-none shadow-lg shadow-white/5"
                 >
-                    <Send className="w-5 h-5" />
-                </NeonButton>
+                    <Send className="w-5 h-5 ml-[-2px] mt-[1px]" />
+                </Button>
             </form>
         </div>
     );
