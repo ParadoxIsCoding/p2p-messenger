@@ -50,17 +50,24 @@ body {
   box-shadow: 0 0 5px var(--color-neon-blue), inset 0 0 5px var(--color-neon-blue);
 }
 
-/* Scrollbar */
+/* Open UI / Firefox support */
+scrollbar-width: thin;
+scrollbar-color: var(--color-glass-border) transparent;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--color-glass-border);
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
 }
